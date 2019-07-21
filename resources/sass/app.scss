@@ -1,0 +1,57 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.box{
+    background: transparent;
+}
+
+.box-head{
+    background: transparent;
+}
+
+.box-body{
+    background: transparent;
+}
+
+.box-head h1{
+    font-size:4.25rem;
+}
+
+span.label-blue{
+    background-color: dodgerblue;
+    color:white;
+}
+span.label-orange{
+    background-color: coral;
+    color:white;
+}
+span.label-pink{
+    background-color: deeppink;
+    color:white;
+}
+span.label-lightpink{
+    background-color: lightpink;
+    color:white;
+}
+span.label-green{
+    background-color: darkgreen;
+    color:white;
+}
+span.label-purple{
+    background-color: mediumpurple;
+    color:white;
+}
+span.label-aqua{
+    background-color: mediumaquamarine;
+    color:white;
+}
+span.label-lightseagreen{
+    background-color: lightseagreen;
+    color:white;
+}

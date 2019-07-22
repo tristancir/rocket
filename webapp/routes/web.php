@@ -23,3 +23,7 @@ Route::get('/feed/filter/{filter}/offset/{offset}', 'FeedItemController@index');
 
 
 Route::get('/judge', 'JudgeController@index');
+
+Route::get('/cp', function(){
+    return view('channel_post.create');
+});

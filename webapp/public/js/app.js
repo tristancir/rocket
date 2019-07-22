@@ -1884,6 +1884,41 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LoremIpsum.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/LoremIpsum.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    console.log('Lipsum component mounted.');
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -37188,6 +37223,51 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LoremIpsum.vue?vue&type=template&id=8c3e6810&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/LoremIpsum.vue?vue&type=template&id=8c3e6810& ***!
+  \*************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-8" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-header" }, [_vm._v("Lorem Ipsum")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _vm._v(
+                "\n                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur tincidunt risus eu dictum. Vestibulum condimentum leo non sem rutrum, a venenatis est iaculis. Nam ac maximus dui, vel varius orci. Aliquam egestas tempus purus, ac cursus lectus bibendum et. Fusce ut felis feugiat tortor sollicitudin facilisis. Donec ac velit non metus blandit euismod. Aenean eleifend porttitor lacus id congue. Donec fringilla convallis elit, id finibus urna ornare sed. Maecenas tellus tellus, euismod sed dolor quis, bibendum dignissim leo. Donec sed vehicula purus, pretium venenatis diam. Aenean nec efficitur enim. Proin gravida velit et bibendum luctus. Donec maximus neque ut lorem sollicitudin, non sollicitudin tortor placerat. Donec elementum eros vel nunc interdum, eget viverra libero venenatis. Quisque vulputate sed urna pellentesque egestas.\n\nProin non est sed dui imperdiet volutpat. Vivamus sodales diam et feugiat dapibus. Ut ac pellentesque nulla. Integer facilisis augue nulla, a egestas neque viverra vel. Suspendisse tincidunt posuere odio. Pellentesque id porttitor enim. Cras ac velit lobortis, pulvinar libero a, volutpat neque. Pellentesque rhoncus ligula vitae lectus molestie aliquet. Donec iaculis tortor nunc, at posuere leo blandit ac. Aliquam metus est, porttitor ac neque sed, vestibulum luctus enim. Maecenas varius sodales urna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In pellentesque placerat ante in mollis. Quisque eget porta nisl. In ultrices eros erat, non ullamcorper dui imperdiet sit amet. Quisque feugiat ligula nec felis finibus maximus.\n                    "
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
@@ -49350,6 +49430,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
+Vue.component('lorem-ipsum', __webpack_require__(/*! ./components/LoremIpsum.vue */ "./resources/js/components/LoremIpsum.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -49357,7 +49438,13 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: function data() {
+    return {};
+  },
+  mounted: function mounted() {
+    console.log('Slick rocket - App mounted');
+  }
 });
 
 /***/ }),
@@ -49489,6 +49576,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/LoremIpsum.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/LoremIpsum.vue ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _LoremIpsum_vue_vue_type_template_id_8c3e6810___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LoremIpsum.vue?vue&type=template&id=8c3e6810& */ "./resources/js/components/LoremIpsum.vue?vue&type=template&id=8c3e6810&");
+/* harmony import */ var _LoremIpsum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoremIpsum.vue?vue&type=script&lang=js& */ "./resources/js/components/LoremIpsum.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _LoremIpsum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _LoremIpsum_vue_vue_type_template_id_8c3e6810___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _LoremIpsum_vue_vue_type_template_id_8c3e6810___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/LoremIpsum.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/LoremIpsum.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/LoremIpsum.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LoremIpsum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./LoremIpsum.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LoremIpsum.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LoremIpsum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/LoremIpsum.vue?vue&type=template&id=8c3e6810&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/LoremIpsum.vue?vue&type=template&id=8c3e6810& ***!
+  \*******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoremIpsum_vue_vue_type_template_id_8c3e6810___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./LoremIpsum.vue?vue&type=template&id=8c3e6810& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LoremIpsum.vue?vue&type=template&id=8c3e6810&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoremIpsum_vue_vue_type_template_id_8c3e6810___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoremIpsum_vue_vue_type_template_id_8c3e6810___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -49507,8 +49663,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /code/onenight/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /code/onenight/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /code/rocket/webapp/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /code/rocket/webapp/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

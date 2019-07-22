@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class GrabPost extends Command
+class PostLoad extends Command
 {
     /**
      * The name and signature of the console command.

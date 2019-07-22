@@ -26,9 +26,13 @@ class PostLoader
 
     public function insertChannelPost($content)
     {
+        $trimmedContent = trim($content);
+        if ( empty($trimmedContent) ) {
+            return;
+        }
         $post = new ChannelPost;
         $post->channel_id = $this->channelId;
-        $post->content = trim($content);
+        $post->content = $trimmedContent;
         $post->save();
     }
 }

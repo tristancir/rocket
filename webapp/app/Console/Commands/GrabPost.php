@@ -39,7 +39,7 @@ class GrabPost extends Command
     {
         $grabber =  new \TristanRock\PostGrabber;
         $channelId = 1;
-        if ( mt_rand(1, 60) <= 3 ) {
+        if ( mt_rand(1, 10) <= 4 ) {
             $post = $grabber->postNext($channelId);
         }
         

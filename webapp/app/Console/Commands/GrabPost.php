@@ -11,7 +11,7 @@ class GrabPost extends Command
      *
      * @var string
      */
-    protected $signature = 'grab:post';
+    protected $signature = 'grab:post {--rand=}';
 
     /**
      * The console command description.
@@ -39,12 +39,15 @@ class GrabPost extends Command
     {
         $grabber =  new \TristanRock\PostGrabber;
         $channelId = 1;
-        if ( mt_rand(1, 10) <= 4 ) {
+        if ( ! empty($this->option('rand')) ) {
+            $percent = $this->option('rand');
+            if ( $percent > 1 && $percent < 100 && mt_rand(1, 100) <= $percent ) {
+                $post = $grabber->postNext($channelId);
+            }
+        } else {
             $post = $grabber->postNext($channelId);
         }
-        
 
         // dd($post->toArray());
-
     }
 }

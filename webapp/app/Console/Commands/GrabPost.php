@@ -38,7 +38,11 @@ class GrabPost extends Command
     public function handle()
     {
         $grabber =  new \TristanRock\PostGrabber;
-        $post = $grabber->postNext(1);
+        $channelId = 1;
+        if ( mt_rand(1, 60) <= 3 ) {
+            $post = $grabber->postNext($channelId);
+        }
+        
 
         // dd($post->toArray());
 

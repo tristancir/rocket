@@ -14,7 +14,7 @@ class ChannelPost extends Model
      * @var array
      */
     protected $fillable = [
-        'posted_at'
+        'posted_at', 'content', 'channel_id'
     ];
 
     public function channel()

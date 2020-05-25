@@ -16,8 +16,10 @@ class PostGrabber
     public function postNext($channelId)
     {
         $post = $this->getNext($channelId);
-        $this->postToChannel($post);
-        $this->updatePost($post);
+        if ( $post ) {
+            $this->postToChannel($post);
+            $this->updatePost($post);
+        }
     }
 
     public function postToChannel(ChannelPost $post)

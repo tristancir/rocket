@@ -11,7 +11,7 @@ class GrabPost extends Command
      *
      * @var string
      */
-    protected $signature = 'grab:post {--rand=}';
+    protected $signature = 'grab:post {--rand=} {--dryrun}';
 
     /**
      * The console command description.
@@ -41,11 +41,22 @@ class GrabPost extends Command
         $channelId = 1;
         if ( ! empty($this->option('rand')) ) {
             $percent = $this->option('rand');
-            if ( $percent > 1 && $percent < 100 && mt_rand(1, 100) <= $percent ) {
-                $post = $grabber->postNext($channelId);
+            // $this->line($percent);
+            $rand = mt_rand(1, 100);
+            // $this->line("fire {$rand} <= {$percent}");
+            if ( $percent > 1 && $percent < 100 && $rand <= $percent ) {
+                if ( $this->option('dryrun') ) {
+                    $this->line("fire {$rand} <= {$percent}");
+                } else {
+                    $post = $grabber->postNext($channelId);
+                }
             }
         } else {
-            $post = $grabber->postNext($channelId);
+            if ( $this->option('dryrun') ) {
+                $this->line('fire all');
+            } else {
+                $post = $grabber->postNext($channelId);
+            }
         }
 
         // dd($post->toArray());

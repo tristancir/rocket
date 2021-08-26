@@ -27,3 +27,6 @@ Route::get('/judge', 'JudgeController@index');
 Route::get('/cp', function(){
     return view('channel_post.create');
 });
+
+Route::get('/discord', 'DiscordController@index');
+Route::get('/discord/oauth', 'DiscordController@oauth');

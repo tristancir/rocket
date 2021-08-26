@@ -1,0 +1,15 @@
+authtoken: xxxxaaaabbbb00001111nnnnddddffff5555ffffttttssssV
+region: us
+console_ui: true
+log_level: info
+log_format: json
+log: ngrok.log
+update: false
+update_channel: stable
+tunnels:
+  rocket:
+    addr: rocket.local
+    host_header: "rocket.local"
+    inspect: false
+    proto: http
+    

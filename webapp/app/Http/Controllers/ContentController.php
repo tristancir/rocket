@@ -74,8 +74,12 @@ class ContentController extends Controller
         $post = ChannelPost::where('channel_post_id', $id)->first();
         $url = $post->content;
         $response = Http::get($url);
+        $contentLength = $response->header('Content-Length');
         return response($response->body())
-            ->header('Content-Type', 'image/jpeg');
+            ->header('Content-Type', 'image/jpeg')
+            ->header('Content-Length', $contentLength)
+            ->header('Access-Control-Allow-Origin', '*')
+            ;
     }
 
 

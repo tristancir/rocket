@@ -48,7 +48,8 @@ class ImageGet extends Command
             $url = $post->content;
             $this->line(urlencode($url));
             $response = Http::withOptions(['verify' => false])->timeout(5)->get($url);
-            dump($response);
+            // dump($response);
+            dump($response->headers());
             if ( $response->status() != 200 ) {
 
             }

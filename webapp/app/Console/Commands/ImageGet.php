@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\{Http,Storage};
 use App\ChannelPost;
 use Carbon\Carbon;
-class ImageCheck extends Command
+class ImageGet extends Command
 {
     /**
      * The name and signature of the console command.

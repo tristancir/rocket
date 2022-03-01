@@ -27,10 +27,11 @@ class ChannelPostController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->only(['content']);
+        $data = $request->only(['content', 'download']);
         $validator = Validator::make($data, 
         [
-            'content' => 'required'
+            'content' => 'required',
+            'download' => 'boolean'
         ]);
         if ( $validator->fails() ) {          
             return response()->json(['error'=>$validator->errors()], 401);

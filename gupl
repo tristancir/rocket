@@ -1,0 +1,16 @@
+#!/bin/bash
+
+while [ true ]
+do
+
+    echo "** Enter post =>"
+    read INPUT
+    if [[ -z ${INPUT} ]]; then
+        exit 0
+    fi
+
+    curl --request POST \
+    --url https://rocket.erotica3.com/api/v1/posts \
+    --form "content=${INPUT}"
+    echo ""
+done

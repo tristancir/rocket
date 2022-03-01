@@ -36,7 +36,7 @@ class AddRemovedColumn extends Migration
             $table->dropColumn('is_removed');
             $table->dropColumn('http_status');
             $table->dropColumn('error_msg');
-            $table->dropColumn('checned_at');
+            $table->dropColumn('checked_at');
         });
     }
 }

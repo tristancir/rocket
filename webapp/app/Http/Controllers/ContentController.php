@@ -2,11 +2,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use TristanRock\PostGrabber;
 use App\ChannelPost;
 use App\{Flip,FlipItem};
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\File;
+
 
 class ContentController extends Controller
 {
@@ -73,13 +76,59 @@ class ContentController extends Controller
     {
         $post = ChannelPost::where('channel_post_id', $id)->first();
         $url = $post->content;
-        $response = Http::get($url);
-        $contentLength = $response->header('Content-Length');
-        return response($response->body())
-            ->header('Content-Type', 'image/jpeg')
-            ->header('Content-Length', $contentLength)
-            ->header('Access-Control-Allow-Origin', '*')
-            ;
+        $tempFile = md5($url);
+        $pathToFile = storage_path('/images/' . $tempFile);
+        if ( ! file_exists($pathToFile) ) {
+            $response = Http::withHeaders([
+                'Referer' => 'https://newtumbl.com/dashboard'
+            ])->get($url);
+            $contentLength = $response->header('Content-Length');
+            $contentType = $response->header('Content-Type');
+            file_put_contents($pathToFile, $response->body());
+            $meta = json_decode($post->meta);
+            // Update content type in the database if needed.
+            if ( ! $meta || ! isset($meta->{'Content-Type'}) ) {
+                $meta->{'Content-Type'} = $contentType;
+                $post->meta = $meta;
+                $post->save();
+            }
+        } else {
+            $meta = json_decode($post->meta);
+            $contentType = $meta->{'Content-Type'} ?? null;
+        }
+        // Save temp
+        $headers = [
+            'Access-Control-Allow-Origin' => '*'
+        ];
+        if ( isset($contentType) ) {
+            $headers['Content-Type'] = $contentType;
+        }
+        if ( isset($contentLength) ) {
+            $headers['Content-Length'] = $contentLength;
+        }
+        
+        // 'Content-Type' => 'image/jpeg',
+        // 'Content-Length' => $contentLength,
+        // 3815
+
+        
+        // $file = File::get($pathToFile);
+        // $r = Response::make($file, 200);
+        // if ( $contentType ) {
+        //     $r->header("Content-Type", $contentType);
+        // }
+        // return $r;
+        
+        
+        return response()->file($pathToFile, $headers);
+        // return $response;
+     
+    
+        // return response($response->body())
+        //     ->header('Content-Type', 'image/jpeg')
+        //     ->header('Content-Length', $contentLength)
+        //     ->header('Access-Control-Allow-Origin', '*')
+        //     ;
     }
 
 

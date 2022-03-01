@@ -13,14 +13,16 @@ class ImageCheck extends Command
      *
      * @var string
      */
-    protected $signature = 'image:check';
+    protected $signature = 'image:check {--http-status=} {--checked=}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Checks images to see if they are there`';
+    protected $description = 'Checks images to see if they are there
+    --checked selects rows checked before this date/time
+    ';
 
     const TIMEOUT = 9;
     const GUZZLE = 20;
@@ -41,12 +43,34 @@ class ImageCheck extends Command
      */
     public function handle()
     {
-        ChannelPost::where([
+        $criteria = [
             ['is_removed', '!=', 1],
-            ['checked_at', null],
-            ['http_status', null]
-        ])
-        ->orderBy('channel_post_id')->limit(10)
+        ];
+        $checkedAt = $this->option('checked');
+        if ( $checkedAt ) {
+            if ( $checkedAt == 'null' ) {
+                $criteria[] = ['checked_at', null];
+            } else {
+                $date = Carbon::parse($checkedAt);
+                $criteria[] = ['checked_at', '<', $date->toDateTimeString()];
+            }
+        }
+        $httpStatusCriteria = [];
+        if ( $this->option('http-status') ) {
+            $params = explode(",", $this->option('http-status'));
+            $a = [];
+            foreach ( $params as $httpStatusParam ) {
+                if ( $httpStatusParam == 'null' ) {
+                    $httpStatusCriteria[] = null;
+                } else {
+                    $httpStatusCriteria[] = $httpStatusParam;
+                }
+            }
+        }
+        $this->line('criteria ' . print_r($criteria, true));
+        $this->line('http status ' . print_r($httpStatusCriteria, true));
+        ChannelPost::where($criteria)->whereIn('http_status', $httpStatusCriteria)
+            ->orderBy('channel_post_id')->limit(10)
             ->chunk(10, function($posts) {
             foreach ( $posts as $post ) {
                 try {
@@ -62,6 +86,10 @@ class ImageCheck extends Command
                     if ( in_array($post->http_status, [400, 403, 404]) ) {
                         $post->is_removed = 1;
                     }
+                    $meta = [
+                        'Content-Type' => $response->header('Content-Type')
+                    ];
+                    $post->meta = json_encode($meta);
                     $post->save();
                 } catch ( \Illuminate\Http\Client\ConnectionException $e ) {
                     $this->line(sprintf('%3d %5d  %s', self::TIMEOUT, $post->channel_post_id, $post->content));

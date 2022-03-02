@@ -9,6 +9,7 @@ use App\{Flip,FlipItem};
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\File;
+use TristanRock\ImageProxy;
 
 
 class ContentController extends Controller
@@ -75,10 +76,30 @@ class ContentController extends Controller
     public function httpgetId(Request $request, $id)
     {
         $id = preg_replace('/^([^.]+)\.(.*)/', '\1', $id);
+
+        
+        $imageProxy = new ImageProxy;
+        $prx = $imageProxy->fetch($id);
+
+        $link = $prx->link;
+        $url = $prx->url;
+        $ext = $prx->ext;
+        $response = $prx->response ;
+        $cacheFileName = $prx->cacheFileName ;
+        $pathToFile = $prx->pathToFile ;
+        $contentType = $prx->contentType;
+        $contentLength = $prx->contentLength;
+        
+
+        /*
         $post = ChannelPost::where('channel_post_id', $id)->first();
         $url = $post->content;
+        $meta = json_decode($post->meta);
         $tempFile = md5($url);
         $pathToFile = storage_path('/images/' . $tempFile);
+
+        $needsFile;
+
         if ( ! file_exists($pathToFile) ) {
             $response = Http::withHeaders([
                 'Referer' => 'https://newtumbl.com/dashboard'
@@ -86,7 +107,6 @@ class ContentController extends Controller
             $contentLength = $response->header('Content-Length');
             $contentType = $response->header('Content-Type');
             file_put_contents($pathToFile, $response->body());
-            $meta = json_decode($post->meta);
             // Update content type in the database if needed.
             if ( ! $meta || ! isset($meta->{'Content-Type'}) ) {
                 if ( ! $meta ) {
@@ -101,6 +121,8 @@ class ContentController extends Controller
             $meta = json_decode($post->meta);
             $contentType = $meta->{'Content-Type'} ?? null;
         }
+        */
+
         // Save temp
         $headers = [
             // 'Access-Control-Allow-Origin' => '*'

@@ -12,10 +12,11 @@ class ImageProxy
     public static function link($id)
     {
         $proxy = new static;
-        return $proxy->makeLink($id);
+        $result = $proxy->fetch($id);
+        return optional($result)->link;
     }
 
-    public function makeLink($id)
+    public function fetch($id)
     {
         try {
             // $id = preg_replace('/^([^.]+)\.(.*)/', '\1', $id);
@@ -25,12 +26,14 @@ class ImageProxy
             }
             $url = $post->content;
             $meta = json_decode($post->meta);
-            $tempFile = md5($url);
-            $pathToFile = storage_path('/images/' . $tempFile);
+            $cacheFileName = md5($url);
+            $pathToFile = storage_path('/images/' . $cacheFileName);
 
             $needContent = ! file_exists($pathToFile);
             $needMeta = ! $meta;
-
+            $response = null;
+            $contentType = null;
+            $contentLength = null;
             if ( $needContent || $needMeta ) {
                 // Might be able to send a HEAD request here just to get the headers
                 // Then only request the content if we need it.
@@ -72,8 +75,9 @@ class ImageProxy
             } else {
                 $ext = null;
             }
+            $link = "/content/httpget/{$id}{$ext}";
 
-            return "/content/httpget/{$id}{$ext}";
+            return (object)compact('link', 'url', 'ext', 'response', 'cacheFileName', 'pathToFile', 'contentType','contentLength');
 
         } catch ( \Exception $e ) {
 

@@ -36,6 +36,7 @@
         @foreach($posts as $post)
             @php
                 $chk = 'ref' . $post->channel_post_id;
+                $meta = ! empty($post->meta) ? json_decode($post->meta) : null ;
             @endphp
             @if ( $even )
             <div class="row mt-4">
@@ -63,7 +64,9 @@
                             @if ( $post->http_status == 200 || $post->http_status === null )
                                 @php
                                     if ( preg_match('/([a-z0-9]+).newtumbl.com/', $post->content ) ) {
-                                        $link = "/content/httpget/$post->channel_post_id";
+                                        //$link = "/content/httpget/$post->channel_post_id";
+                                        $link = \TristanRock\ImageProxy::link($post->channel_post_id);
+                                        
                                         $m = 'proxied';
                                     } else {
                                         $link = $post->content;
@@ -81,8 +84,9 @@
                         <div class="text-center">Other {{ $post->content }}</div>
                         @endif
                         <div class="">HTTP Status <?=  $post->http_status === null ? 'null' :  $post->http_status ?></div>
+                        <div class="">Content type <?=  $meta->{'Content-Type'} ?? null ?></div>
                         <div class="">
-                            <a href="/content/httpget/{{ $post->channel_post_id }}">Proxy image</a>
+                            <a href="{{ \TristanRock\ImageProxy::link($post->channel_post_id) }}">Proxy image</a>
                             @if ( $m == 'proxied' )
                             | <a href="{{ $post->content }}">Direct Image link</a>
                             @endif

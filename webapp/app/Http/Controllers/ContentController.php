@@ -74,6 +74,7 @@ class ContentController extends Controller
 
     public function httpgetId(Request $request, $id)
     {
+        $id = preg_replace('/^([^.]+)\.(.*)/', '\1', $id);
         $post = ChannelPost::where('channel_post_id', $id)->first();
         $url = $post->content;
         $tempFile = md5($url);

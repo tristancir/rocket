@@ -84,7 +84,7 @@
                         <div class="text-center">Other {{ $post->content }}</div>
                         @endif
                         <div class="">HTTP Status <?=  $post->http_status === null ? 'null' :  $post->http_status ?></div>
-                        <div class="">Content type <?=  $meta->{'Content-Type'} ?? null ?></div>
+                        <div class="">Content type <?=  $meta->{'Content-Type'} ?? 'null' ?></div>
                         <div class="">
                             <a href="{{ \TristanRock\ImageProxy::link($post->channel_post_id) }}">Proxy image</a>
                             @if ( $m == 'proxied' )

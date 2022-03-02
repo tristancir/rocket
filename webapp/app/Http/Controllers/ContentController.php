@@ -94,7 +94,7 @@ class ContentController extends Controller
                 } else {
                     $meta->{'Content-Type'} = $contentType;
                 }
-                $post->meta = $meta;
+                $post->meta = json_encode($meta);
                 $post->save();
             }
         } else {

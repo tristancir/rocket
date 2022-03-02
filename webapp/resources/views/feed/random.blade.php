@@ -90,9 +90,9 @@
                         <div class="">Content type <?=  $meta->{'Content-Type'} ?? 'null' ?></div>
                         <div class="">
                             <a href="{{ \TristanRock\ImageProxy::link($post->channel_post_id) }}">Proxy image</a>
-                            @if ( $m == 'proxied' )
+                            
                             | <a href="{{ $post->content }}">Direct Image link</a>
-                            @endif
+                            
                         </div>
                     </div>
                 </div><!-- .col -->

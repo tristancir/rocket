@@ -102,9 +102,10 @@ class ContentController extends Controller
             $contentType = $meta->{'Content-Type'} ?? null;
         }
         // Save temp
-        // $headers = [
-        //     'Access-Control-Allow-Origin' => '*'
-        // ];
+        $headers = [
+            // 'Access-Control-Allow-Origin' => '*'
+            'X-Rocket-Element' => $id
+        ];
         if ( isset($contentType) ) {
             $headers['Content-Type'] = $contentType;
         }

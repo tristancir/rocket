@@ -83,6 +83,7 @@
                         <div class="text-center"><a href="{{ $post->content }}">Link</a></div>
                         <div class="text-center">Other {{ $post->content }}</div>
                         @endif
+                        <div class="">From <?=  parse_url($post->content)  ?></div>
                         <div class="">HTTP Status <?=  $post->http_status === null ? 'null' :  $post->http_status ?></div>
                         <div class="">Content type <?=  $meta->{'Content-Type'} ?? 'null' ?></div>
                         <div class="">

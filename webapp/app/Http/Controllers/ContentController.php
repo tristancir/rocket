@@ -111,31 +111,13 @@ class ContentController extends Controller
         }
         if ( isset($contentLength) ) {
             $headers['Content-Length'] = $contentLength;
-        }
-        
-        // 'Content-Type' => 'image/jpeg',
-        // 'Content-Length' => $contentLength,
-        // 3815
-
-        
-        // $file = File::get($pathToFile);
-        // $r = Response::make($file, 200);
-        // if ( $contentType ) {
-        //     $r->header("Content-Type", $contentType);
-        // }
-        // return $r;
-        
+        }        
         
         return response()->file($pathToFile, $headers);
-        // return $response;
-     
     
         // return response($response->body())
-        //     ->header('Content-Type', 'image/jpeg')
+        //     ->header('Content-Type', $contentType)
         //     ->header('Content-Length', $contentLength)
-        //     ->header('Access-Control-Allow-Origin', '*')
         //     ;
     }
-
-
 }

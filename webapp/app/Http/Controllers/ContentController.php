@@ -89,7 +89,11 @@ class ContentController extends Controller
             $meta = json_decode($post->meta);
             // Update content type in the database if needed.
             if ( ! $meta || ! isset($meta->{'Content-Type'}) ) {
-                $meta->{'Content-Type'} = $contentType;
+                if ( ! $meta ) {
+                    $meta = (object)['Content-Type' => $contentType];
+                } else {
+                    $meta->{'Content-Type'} = $contentType;
+                }
                 $post->meta = $meta;
                 $post->save();
             }

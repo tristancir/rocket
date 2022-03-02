@@ -28,6 +28,7 @@
     </div>
     <form x-ref="form_remove" id="form_remove" name="form_remove" action="/posts/remove" method="post">
     @csrf
+    <input type="hidden" value="{{ $rand }}">
     <div class="row">
         <div class="col-sm-12 ">
         @php
@@ -69,7 +70,8 @@
                                         
                                         $m = 'proxied';
                                     } else {
-                                        $link = $post->content;
+                                        $link = \TristanRock\ImageProxy::link($post->channel_post_id);
+                                        //$link = $post->content;
                                         $m = 'direct';
                                     }
                                 @endphp

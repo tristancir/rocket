@@ -43,18 +43,21 @@ class ImageProxy
                 if ( ! $needContent ) {
                     $response = Http::withOptions(['verify' => false])->timeout(10)->head($url);
                     if ( $response->status() == 405 ) {
+                        Log::info("HEAD failed. Downloading content to get content-type for {$id} {$url}");
                         $response = Http::withOptions(['verify' => false])->timeout(10)->get($url);
                     }
                 } else {
+                    Log::info("Downloading content to save file for {$id} {$url}");
                     $response = Http::withOptions(['verify' => false])->timeout(10)->get($url);
                 }
-
+                
                 // $response = Http::withHeaders([
                 //     'Referer' => 'https://newtumbl.com/dashboard'
                 // ])->get($url);
                 $contentLength = $response->header('Content-Length');
                 $contentType = $response->header('Content-Type');
                 if ( $needContent ) {
+                    Log::info("Writing file {$cacheFileName} for {$id} {$url}");
                     file_put_contents($pathToFile, $response->body());
                 }
                 // Update content type in the database if needed.

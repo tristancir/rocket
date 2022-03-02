@@ -32,9 +32,9 @@ class FeedController extends Controller
     public function randomView(Request $request, $rand)
     {
         // $input = $request->input()
-        $posts = (new PostGrabber)->getRandom(20);
+        $posts = (new PostGrabber)->getRandom($rand);
         
-        return view('feed.random', compact('posts'));
+        return view('feed.random', compact('posts', 'rand'));
     }
 
     /**
@@ -47,6 +47,7 @@ class FeedController extends Controller
     public function remove(Request $request)
     {
         $input = $request->input();
+        $rand = $input['rand'] ?? 4;
         $filtered = array_filter(array_keys($input), function($item){
             return preg_match('/^remove-.*/', $item);
         });
@@ -57,6 +58,6 @@ class FeedController extends Controller
         // dd($list);
         ChannelPost::whereIn('channel_post_id', $list)->update(['is_removed' => true]);
         // Log::debug(print_r($posts->count(), true));
-        return redirect('/view/random/20');
+        return redirect("/view/random/{$rand}");
     }
 }

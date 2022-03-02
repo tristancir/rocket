@@ -13,7 +13,7 @@ class ImageCheck extends Command
      *
      * @var string
      */
-    protected $signature = 'image:check {--http-status=} {--checked=}';
+    protected $signature = 'image:check {--id=} {--http-status=} {--checked=}';
 
     /**
      * The console command description.
@@ -21,7 +21,9 @@ class ImageCheck extends Command
      * @var string
      */
     protected $description = 'Checks images to see if they are there
-    --checked selects rows checked before this date/time
+    --id            Select a specific. This will not work with other options.
+    --checked       selects rows checked before this date/time
+    --http-status   Specify a comma list of http statuses to recheck
     ';
 
     const TIMEOUT = 9;
@@ -46,31 +48,40 @@ class ImageCheck extends Command
         $criteria = [
             ['is_removed', '!=', 1],
         ];
-        $checkedAt = $this->option('checked');
-        if ( $checkedAt ) {
-            if ( $checkedAt == 'null' ) {
-                $criteria[] = ['checked_at', null];
-            } else {
-                $date = Carbon::parse($checkedAt);
-                $criteria[] = ['checked_at', '<', $date->toDateTimeString()];
-            }
-        }
-        $httpStatusCriteria = [];
-        if ( $this->option('http-status') ) {
-            $params = explode(",", $this->option('http-status'));
-            $a = [];
-            foreach ( $params as $httpStatusParam ) {
-                if ( $httpStatusParam == 'null' ) {
-                    $httpStatusCriteria[] = null;
+        $id = $this->option('id');
+        if ( $id ) {
+            $criteria[] = ['channel_post_id', $id];
+        } else {
+            $checkedAt = $this->option('checked');
+            if ( $checkedAt ) {
+                if ( $checkedAt == 'null' ) {
+                    $criteria[] = ['checked_at', null];
                 } else {
-                    $httpStatusCriteria[] = $httpStatusParam;
+                    $date = Carbon::parse($checkedAt);
+                    $criteria[] = ['checked_at', '<', $date->toDateTimeString()];
                 }
             }
+            $httpStatusCriteria = [];
+            if ( $this->option('http-status') ) {
+                $params = explode(",", $this->option('http-status'));
+                $a = [];
+                foreach ( $params as $httpStatusParam ) {
+                    if ( $httpStatusParam == 'null' ) {
+                        $httpStatusCriteria[] = null;
+                    } else {
+                        $httpStatusCriteria[] = $httpStatusParam;
+                    }
+                }
+            }
+            $this->line('http status ' . print_r($httpStatusCriteria, true));
         }
         $this->line('criteria ' . print_r($criteria, true));
-        $this->line('http status ' . print_r($httpStatusCriteria, true));
-        ChannelPost::where($criteria)->whereIn('http_status', $httpStatusCriteria)
-            ->orderBy('channel_post_id')->limit(10)
+        $model = ChannelPost::where($criteria);
+        if ( ! empty($httpStatusCriteria) ) {
+            $model->whereIn('http_status', $httpStatusCriteria);
+        }
+        
+        $model->orderBy('channel_post_id')->limit(10)
             ->chunk(10, function($posts) {
             foreach ( $posts as $post ) {
                 try {

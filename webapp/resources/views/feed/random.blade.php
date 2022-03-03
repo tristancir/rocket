@@ -22,30 +22,33 @@
 }">
 
     <div class="row">
-        <div class="col text-center">
-            <button @click="$refs.form_remove.submit()">Remove</button>
+        <div class="col text-center ">
+            <button class="btn" @click="$refs.form_remove.submit()">Next</button>
+            <a class="link" href="">Go</a>
         </div>
     </div>
     <form x-ref="form_remove" id="form_remove" name="form_remove" action="/posts/remove" method="post">
     @csrf
     <input type="hidden" value="{{ $rand }}">
-    <div class="row">
-        <div class="col-sm-12 ">
+    <div class="grid grid-cols-3">
+        <div class="">
         @php
-            $even = true;
+            $i = 0;
         @endphp
         @foreach($posts as $post)
             @php
+                $rowbreak = ($i % 3);
+                ++$i;
                 $chk = 'ref' . $post->channel_post_id;
                 $meta = ! empty($post->meta) ? json_decode($post->meta) : null ;
             @endphp
-            @if ( $even )
+            @if ( $rowbreak == 0 )
             <div class="row mt-4">
             @endif
             @php
                 $m = null;
             @endphp
-                <div class="col-xs-6 col-sm-6 bg-warning">
+                <div class="col-xs-4 col-sm-4 bg-yellow-200">
                     <div class="text-center">
                         <input type="checkbox" x-ref="{{ $chk }}" name="remove-{{ $post->channel_post_id }}"> Remove {{ $post->channel_post_id }}
                     </div>
@@ -75,7 +78,7 @@
                                         $m = 'direct';
                                     }
                                 @endphp
-                            <div class="text-center"><img @click="toggle($refs.{{ $chk }})" height="128" src="{{ $link }}"></div>
+                            <div class="text-center"><img @click="toggle($refs.{{ $chk }})" class="w-64" src="{{ $link }}"></div>
                             <div class="">{{ $m }}</div>
                             @else
                             <div class="text-center">{{ $post->content }}></div>
@@ -96,11 +99,11 @@
                         </div>
                     </div>
                 </div><!-- .col -->
-            @if ( ! $even )
+            @if ( $rowbreak == 2 )
             </div><!-- .row -->
             @endif
             @php
-                $even = ! $even;
+                //$even = ! $even;
             @endphp
         @endforeach
         </div><!-- .col -->

@@ -22,8 +22,8 @@
 }">
 
     <div class="row">
-        <div class="col text-center ">
-            <button class="btn" @click="$refs.form_remove.submit()">Next</button>
+        <div class="text-center col ">
+            <button class="btn" @click="$refs.form_remove.submit()">Remove & Next</button>
             <a class="link" href="">Go</a>
         </div>
     </div>
@@ -31,7 +31,7 @@
     @csrf
     <input type="hidden" value="{{ $rand }}">
     <div class="grid grid-cols-3">
-        <div class="">
+        <!--div class=""-->
         @php
             $i = 0;
         @endphp
@@ -43,16 +43,16 @@
                 $meta = ! empty($post->meta) ? json_decode($post->meta) : null ;
             @endphp
             @if ( $rowbreak == 0 )
-            <div class="row mt-4">
+            <!--div class="mt-4 row"-->
             @endif
             @php
                 $m = null;
             @endphp
-                <div class="col-xs-4 col-sm-4 bg-yellow-200">
+                <div class="mb-8 bg-yellow-200 col-xs-4 col-sm-4">
                     <div class="text-center">
                         <input type="checkbox" x-ref="{{ $chk }}" name="remove-{{ $post->channel_post_id }}"> Remove {{ $post->channel_post_id }}
                     </div>
-                    <div class="text-center">
+                    <div class="text-center ">
                         @php
                             if (str_ends_with($post->content, '.jpeg') || str_ends_with($post->content, '.jpg') || str_ends_with($post->content, '.png') ||
                                 str_ends_with($post->content, '.gif') ||
@@ -78,7 +78,7 @@
                                         $m = 'direct';
                                     }
                                 @endphp
-                            <div class="text-center"><img @click="toggle($refs.{{ $chk }})" class="w-64" src="{{ $link }}"></div>
+                            <div class="text-center"><img @click="toggle($refs.{{ $chk }})" class="inline-block w-32" src="{{ $link }}"></div>
                             <div class="">{{ $m }}</div>
                             @else
                             <div class="text-center">{{ $post->content }}></div>
@@ -100,16 +100,16 @@
                     </div>
                 </div><!-- .col -->
             @if ( $rowbreak == 2 )
-            </div><!-- .row -->
+            <!--/div--><!-- .row -->
             @endif
             @php
                 //$even = ! $even;
             @endphp
         @endforeach
         </div><!-- .col -->
-    </div><!-- .row -->
+    <!--/div--><!-- .row -->
     <div class="row">
-        <div class="col text-center">
+        <div class="text-center col">
             <button @click="$refs.form_remove.submit()">Remove</button>
         </div>
     </div>

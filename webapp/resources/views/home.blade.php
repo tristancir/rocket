@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-Home
+<div class="p-4">
+    Home
+</div>
 @stop

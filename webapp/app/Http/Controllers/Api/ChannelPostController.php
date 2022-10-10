@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\ChannelPost;
+use Illuminate\Support\Facades\{Log,Storage};
 
 class ChannelPostController extends Controller
 {
@@ -45,6 +46,41 @@ class ChannelPostController extends Controller
             'channelPost' => $channelPost,
         ], 200);
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function save(Request $request)
+    {
+        // Log::debug($request->getContent());
+        // Log::debug("headers " . print_r($request->header(), true));
+        // Log::debug("content " . $request->input('content'));
+        
+        $data = $request->only(['content']);
+        $validator = Validator::make($data, 
+        [
+            'content' => 'required',
+        ]);
+        // Log::debug(print_r($data, true));
+        if ( $validator->fails() ) {          
+            return response()->json(['error' => $validator->errors()], 400);
+        }
+        
+        $data['channel_id'] = 1;
+
+        // $channelPost = ChannelPost::create($data);
+        Storage::disk('local')->append('data/list.txt', $data['content']);
+        return response()->json([
+            'message' => 'ok',
+            'error' => false,            
+        ], 200);
+    }
+
+
+
 
     /**
      * Display the specified resource.

@@ -1,0 +1,70 @@
+
+
+@tailwind base;
+@tailwind components;
+.btn {
+    @apply px-2 py-1 text-white bg-blue-500 rounded;
+}
+.btn-gray {
+    @apply p-1 text-gray-600 bg-gray-200 border border-gray-400 rounded;
+}
+.btn-orange{
+    @apply px-2 py-1 text-white rounded;
+    background-color:#BA4A00;
+}
+
+.btn-girls{
+    @apply px-2 py-1 text-white rounded;
+    background-color:#e03997;
+}
+
+.btn-danger{
+    @apply px-2 py-1 text-white bg-red-600 rounded hover:no-underline hover:bg-red-400 hover:text-white;
+}
+.form-text{
+    @apply px-1 py-1 border;
+}
+.link {
+    @apply text-blue-500 hover:text-blue-500;
+}
+.link-bg-blue {
+    @apply text-center text-gray-100 hover:text-white hover:underline;
+}
+.page-heading{
+    @apply text-xl font-bold;
+}
+.page-content{
+    @apply p-3 bg-gray-100;
+}
+
+.nav-link{
+    @apply text-white hover:text-blue-500;
+}
+
+@tailwind utilities;
+
+@layer components{
+
+    /* Navbar DropDown items */
+
+    .navbar-drop-item{
+        @apply
+            absolute w-48 origin-top-right rounded-md shadow-lg bg-blue-header ring-1 ring-black ring-opacity-5 focus:outline-none;
+    }
+
+    .navbar-drop-item-a{
+        @apply block px-4 py-2 text-base text-white rounded-md hover:bg-blue-footer;
+    }
+
+    /* Other pages */
+
+    .title{
+        @apply text-2xl font-bold md:text-3xl lg:text-4xl;
+    }
+
+    .gray-box-title{
+        @apply text-xl font-bold md:text-2xl lg:text-3xl;
+    }
+}
+
+

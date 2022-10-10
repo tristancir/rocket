@@ -1,7 +1,7 @@
 <?php
 namespace TristanRock;
-use App\Channel;
-use App\ChannelPost;
+use App\Models\Channel;
+use App\Models\ChannelPost;
 use Carbon\Carbon;
 
 // new \TristanRock\PostLoader

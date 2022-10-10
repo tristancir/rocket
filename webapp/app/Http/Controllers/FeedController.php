@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use TristanRock\PostGrabber;
-use App\ChannelPost;
+use App\Models\ChannelPost;
 use Illuminate\Support\Facades\Log;
+
 class FeedController extends Controller
 {
     /**
@@ -47,7 +48,7 @@ class FeedController extends Controller
     public function remove(Request $request)
     {
         $input = $request->input();
-        $rand = $input['rand'] ?? 4;
+        $rand = $input['rand'] ?? 6;
         $filtered = array_filter(array_keys($input), function($item){
             return preg_match('/^remove-.*/', $item);
         });

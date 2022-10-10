@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use TristanRock\PostGrabber;
-use App\ChannelPost;
-use App\{Flip,FlipItem};
+use App\Models\ChannelPost;
+use App\Models\{Flip,FlipItem};
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\File;
@@ -37,7 +37,7 @@ class ContentController extends Controller
         $flip = new FlipItem;
         $flip->content = $request->url;
         $flip->comments = $request->comments;
-        $flip->flip_id = 1;
+        $flip->flip_id = 4;
         $flip->posted_at = NOW();
         $flip->save();
         return redirect()->route('content.create');
@@ -53,6 +53,7 @@ class ContentController extends Controller
      */
     public function media(Request $request, $x)
     {
+        Log::info(__METHOD__ . ' ' . $x);
         // dd($x);
         // $input = $request->input()
         $content = (new \TristanRock\ImageSet)->get($x);
@@ -73,13 +74,46 @@ class ContentController extends Controller
             ->header('Content-Type', 'image/jpeg');
     }
 
+    public function httpgetCacheId(Request $request, $id)
+    {
+        $id = preg_replace('/^([^.]+)\.(.*)/', '\1', $id);
+    
+        
+        $imageProxy = new ImageProxy;
+        $prx = $imageProxy->fetchCachedId($id);
+    
+        $link = $prx->link;
+        $url = $prx->url;
+        $ext = $prx->ext;
+        $response = $prx->response ;
+        // $cacheFileName = $prx->cacheFileName ;
+        $pathToFile = $prx->pathToFile ;
+        $contentType = $prx->contentType;
+        $contentLength = $prx->contentLength;
+
+        // Save temp
+        $headers = [
+            // 'Access-Control-Allow-Origin' => '*'
+            'X-Rocket-Element' => $id
+        ];
+        if ( isset($contentType) ) {
+            $headers['Content-Type'] = $contentType;
+        }
+        if ( isset($contentLength) ) {
+            $headers['Content-Length'] = $contentLength;
+        }        
+
+        return response()->file($pathToFile, $headers);
+
+    }
+
     public function httpgetId(Request $request, $id)
     {
         $id = preg_replace('/^([^.]+)\.(.*)/', '\1', $id);
 
         
         $imageProxy = new ImageProxy;
-        $prx = $imageProxy->fetch($id);
+        $prx = $imageProxy->fetchId($id);
 
         $link = $prx->link;
         $url = $prx->url;

@@ -1,0 +1,4 @@
+echo building tailwind.css
+echo ./node_modules/postcss-cli/bin/postcss tailwind.css -o ../webapp/public/css/tailwind.css
+./node_modules/postcss-cli/bin/postcss tailwind.css -o ../webapp/public/css/tailwind.css
+

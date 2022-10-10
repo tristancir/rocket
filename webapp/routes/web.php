@@ -21,6 +21,8 @@ Route::get('/feed', 'FeedItemController@index');
 Route::get('/feed/offset/{offset}', 'FeedItemController@index2');
 Route::get('/feed/filter/{filter}/offset/{offset}', 'FeedItemController@index');
 
+Route::get('/flip/{flip}', 'FlipController@index');
+
 
 Route::get('/judge', 'JudgeController@index');
 
@@ -42,7 +44,7 @@ Route::get('/content/view/set/{x}', 'ContentController@mediaView');
 Route::get('/content/httpget/url/{url}', 'ContentController@httpgetUrl');
 Route::get('/content/httpget/{id}', 'ContentController@httpgetId');
 
-
+Route::get('/content/httpget/cache/{id}', 'ContentController@httpgetCacheId');
 
 Route::get('/content/twinks/{x}', function(){
     return response("https://dn0.newtumbl.com/img/1207679/119028796/1/38784184/nT_y9diqc6nuurpsgk4hnzg7pdf.jpg

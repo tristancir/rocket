@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ChannelPost;
+use App\Models\ChannelPost;
 
 class ChannelPostController extends Controller
 {

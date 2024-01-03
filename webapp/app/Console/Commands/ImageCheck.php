@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\{Http,Storage};
-use App\ChannelPost;
+use App\Models\ChannelPost;
 use Carbon\Carbon;
 class ImageCheck extends Command
 {

@@ -80,6 +80,9 @@ class ImageCheck extends Command
         if ( ! empty($httpStatusCriteria) ) {
             $model->whereIn('http_status', $httpStatusCriteria);
         }
+
+        $count = $model->count();
+        $this->line("Check {$count} rows");
         
         $model->orderBy('channel_post_id')->limit(10)
             ->chunk(10, function($posts) {

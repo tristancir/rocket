@@ -29,7 +29,7 @@
     </div>
     <form x-ref="form_remove" id="form_remove" name="form_remove" action="/posts/remove" method="post">
     @csrf
-    <input type="hidden" value="{{ $rand }}">
+    <input type="hidden" name="rand" value="{{ $rand }}">
     <div class="grid grid-cols-3">
         <!--div class=""-->
         @php

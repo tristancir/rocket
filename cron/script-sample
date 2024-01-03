@@ -1,0 +1,10 @@
+# Get the directory where the script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+# Define the file to be sourced
+CONFIG_FILE="$SCRIPT_DIR/config"
+
+. "$CONFIG_FILE"
+
+ARTISAN=$DIR/artisan
+$PHP $ARTISAN grab:post --rand=25 > /dev/null
